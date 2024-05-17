@@ -24,6 +24,9 @@ class ContactService {
   async add(contact: Contact): Promise<Contact[]> {
     return await api.post(this.url, contact);
   }
+  async update(contact: Contact): Promise<Contact[]> {
+    return await api.put(this.url, contact);
+  }
 }
 
 export const contactService = new ContactService();
