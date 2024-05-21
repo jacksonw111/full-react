@@ -1,10 +1,11 @@
-import { Form } from "react-router-dom";
+import { useFetcher } from "react-router-dom";
 import { Contact } from "../api/contacts";
 
 const ContactFavorite = ({ contact }: { contact: Contact }) => {
+  const fetcher = useFetcher();
   const favorite = contact.favorite;
   return (
-    <Form method="post">
+    <fetcher.Form method="post">
       <button
         name="favorite"
         value={favorite ? "false" : "true"}
@@ -12,7 +13,7 @@ const ContactFavorite = ({ contact }: { contact: Contact }) => {
       >
         {favorite ? "★" : "☆"}
       </button>
-    </Form>
+    </fetcher.Form>
   );
 };
 export default ContactFavorite;

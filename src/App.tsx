@@ -1,10 +1,19 @@
+import { AnimatePresence } from "framer-motion";
 import { RouterProvider } from "react-router-dom";
+import MotionLazy from "./components/motion-lazy";
 import { router } from "./router";
 
 function App() {
   // const routers = useMemo(() => router, []);
   return (
-    <RouterProvider router={router()} fallbackElement={<p>Initial Load...</p>} />
+    <AnimatePresence>
+      <MotionLazy>
+        <RouterProvider
+          router={router}
+          fallbackElement={<p>react router Initial Load...</p>}
+        />
+      </MotionLazy>
+    </AnimatePresence>
   );
 }
 

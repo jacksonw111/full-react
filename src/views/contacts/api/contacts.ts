@@ -12,8 +12,8 @@ export interface Contact {
 
 class ContactService {
   url = "/contacts";
-  async all(): Promise<Contact[]> {
-    const { data } = await api.get(this.url);
+  async all(params?: { name?: string }): Promise<Contact[]> {
+    const { data } = await api.get(this.url, { params });
     return data;
   }
 
@@ -25,7 +25,11 @@ class ContactService {
     return await api.post(this.url, contact);
   }
   async update(contact: Contact): Promise<Contact[]> {
-    return await api.put(this.url, contact);
+    return await api.put(`${this.url}`, contact);
+  }
+  async remove(id: number): Promise<Contact> {
+    const { data } = await api.delete(`${this.url}/${id}`);
+    return data;
   }
 }
 

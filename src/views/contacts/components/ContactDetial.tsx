@@ -19,7 +19,7 @@ export default function ContactDetail() {
             </>
           ) : (
             <i>No Name</i>
-          )}{" "}
+          )}
           <ContactFavorite contact={contact} />
         </h1>
 

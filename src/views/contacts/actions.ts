@@ -23,7 +23,10 @@ export const addContactAction = async ({ request }: ActionFunctionArgs) => {
   return redirect("/contacts");
 };
 
-export const updateContactAction = async ({ request }: ActionFunctionArgs) => {
+export const updateContactAction = async ({
+  params,
+  request,
+}: ActionFunctionArgs) => {
   const form = await request.formData();
   const first = form.get("first") as string;
   const last = form.get("last") as string;
@@ -34,6 +37,7 @@ export const updateContactAction = async ({ request }: ActionFunctionArgs) => {
   const notes = form.get("notes") as string;
   const favorite = false;
   await contactService.update({
+    id: Number(params.contactId),
     first,
     last,
     avatar,
@@ -42,5 +46,15 @@ export const updateContactAction = async ({ request }: ActionFunctionArgs) => {
     favorite,
   });
   // 必须返回点什么，不然会报错
-  return redirect("/contacts");
+  return redirect("/contacts/" + params.contactId);
+};
+
+export const destoryContactAction = async ({ params }: ActionFunctionArgs) => {
+  await contactService.remove(Number(params.contactId));
+  return redirect(`/contacts`);
+};
+
+export const favoriteAction = async () => {
+  console.log("favorite action");
+  return null;
 };

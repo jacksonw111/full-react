@@ -1,8 +1,12 @@
 import { LoaderFunctionArgs } from "react-router-dom";
 import { contactService } from "./api/contacts";
 
-export const rootLoader = async () => {
-  const data = await contactService.all();
+export const rootLoader = async ({ request }: LoaderFunctionArgs) => {
+  const url = new URL(request.url);
+  const searchParams = url.searchParams;
+  const name = searchParams.get("name") as string;
+
+  const data = await contactService.all({ name });
   console.log(data);
   return data;
 };

@@ -4,7 +4,7 @@ import "./index.css";
 import { worker } from "./mocks/browser";
 
 async function start() {
-  if (import.meta.env.VITE_PROJECT_ENV === "dev") {
+  if (import.meta.env.VITE_APP_ENV === "development") {
     console.log("start");
     await worker.start({ onUnhandledRequest: "bypass" });
   }
